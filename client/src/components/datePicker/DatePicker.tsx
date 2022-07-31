@@ -16,6 +16,36 @@ export const DatePicker = () => {
         height={220}
         selectable={true}
         dateClick={clickHandler}
+        events={[
+          {
+            groupId: 'testGroupId',
+            title: 'Czwarteczki',
+            daysOfWeek: ['4'],
+            display: 'background',
+            backgroundColor: 'red',
+            textColor: 'white',
+            className: 'elo',
+          },
+          {
+            groupId: 'testGroupId',
+            title: 'Piateczki',
+            daysOfWeek: ['5'],
+            display: 'background',
+
+            textColor: 'white',
+            className: 'elo',
+            color: 'white',
+          },
+          {
+            groupId: 'testGroupId',
+            title: 'Soboty',
+            daysOfWeek: ['6'],
+            display: 'background',
+            backgroundColor: 'red',
+            textColor: 'white',
+            className: 'elo',
+          },
+        ]}
       />
     </div>
   )

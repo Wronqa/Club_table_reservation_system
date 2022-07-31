@@ -3,4 +3,15 @@
   color: white;
   font-size: 0.4rem;
   cursor: pointer;
+  font-weight: 400;
+  opacity: 1;
+}
+.elo {
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  background-color: rgb(255, 0, 179) !important;
+
+  font-size: 0.5rem;
+  color: white;
+  opacity: 1;
 }
