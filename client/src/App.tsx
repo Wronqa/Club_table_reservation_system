@@ -7,7 +7,7 @@ import { TimePicker } from './components/timePicker/TimePicker'
 function App() {
   return (
     <div className='App'>
-      <TablePicker />
+      <DatePicker />
     </div>
   )
 }
