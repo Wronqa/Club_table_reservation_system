@@ -1,8 +1,10 @@
+import { useReducer } from 'preact/hooks'
 import { createContext } from 'react'
 import {
   ReservationContext as ReservationContextType,
   ReservationContextProps as ReservationContextPropsType,
 } from '../types/ReservationContextTypes'
+import { ReservationReducer } from './ReservationReducer'
 
 const INITIAL_STATE: ReservationContextType = {
   date: null,
@@ -16,6 +18,7 @@ export const ReservationContext =
 export const ReservationContextProvider = ({
   children,
 }: ReservationContextPropsType) => {
+  const [state, dispatch] = useReducer(ReservationReducer, INITIAL_STATE)
   return (
     <ReservationContext.Provider value={{} as ReservationContextType}>
       {children}

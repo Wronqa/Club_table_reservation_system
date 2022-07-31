@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 export type ReservationContextProps = {
   children: ReactNode
 }
-enum HOURS {
+export enum HOURS {
   '21:00',
   '21:30',
   '22:00',
