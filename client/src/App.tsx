@@ -4,12 +4,15 @@ import { DatePicker } from './components/datePicker/DatePicker'
 import { TablePicker } from './components/tablePicker/TablePicker'
 import { TimePicker } from './components/timePicker/TimePicker'
 import { OrderSummary } from './components/orderSummary/OrderSummary'
+import { ReservationContextProvider } from './context/ReservationContext'
 
 function App() {
   return (
-    <div className='App'>
-      <OrderSummary />
-    </div>
+    <ReservationContextProvider>
+      <div className='App'>
+        <OrderSummary />
+      </div>
+    </ReservationContextProvider>
   )
 }
 

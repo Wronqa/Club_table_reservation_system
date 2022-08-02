@@ -11,7 +11,9 @@ const INITIAL_STATE: ReservationContextType = {
   time: null,
   table: null,
   personalData: null,
+  dispatch: null,
 }
+
 export const ReservationContext =
   createContext<ReservationContextType>(INITIAL_STATE)
 
@@ -20,7 +22,7 @@ export const ReservationContextProvider = ({
 }: ReservationContextPropsType) => {
   const [state, dispatch] = useReducer(ReservationReducer, INITIAL_STATE)
   return (
-    <ReservationContext.Provider value={{} as ReservationContextType}>
+    <ReservationContext.Provider value={state}>
       {children}
     </ReservationContext.Provider>
   )

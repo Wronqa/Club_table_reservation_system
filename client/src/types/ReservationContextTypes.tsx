@@ -1,4 +1,5 @@
-import { ReactNode } from 'react'
+import { Dispatch, ReactNode } from 'react'
+import { ReservationAction } from './ReservationActionsTypes'
 
 export type ReservationContextProps = {
   children: ReactNode
@@ -20,4 +21,5 @@ export type ReservationContext = {
   time: HOURS | null
   table: number | null
   personalData: PersonalData | null
+  dispatch: Dispatch<ReservationAction> | null
 }
