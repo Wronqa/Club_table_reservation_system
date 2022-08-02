@@ -10,7 +10,7 @@ function App() {
   return (
     <ReservationContextProvider>
       <div className='App'>
-        <OrderSummary />
+        <DatePicker />
       </div>
     </ReservationContextProvider>
   )

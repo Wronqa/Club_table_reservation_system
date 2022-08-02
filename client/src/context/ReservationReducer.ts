@@ -1,9 +1,9 @@
 import { ReservationAction as ReservationActionType } from '../types/ReservationActionsTypes'
-import { ReservationContext as ReservationContextType } from '../types/ReservationContextTypes'
+import { ReservationInfo as ReservationInfoType } from '../types/ReservationContextTypes'
 import { ReservationActions } from './ReservationActions'
 
 export const ReservationReducer = (
-  state: ReservationContextType,
+  state: ReservationInfoType,
   action: ReservationActionType
 ) => {
   const handler = ReservationActions[action.type]

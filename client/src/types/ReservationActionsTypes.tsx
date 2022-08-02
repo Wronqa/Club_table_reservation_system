@@ -1,5 +1,5 @@
 import { HOURS, PersonalData } from '../types/ReservationContextTypes'
-import { ReservationContext as ReservationContextType } from '../types/ReservationContextTypes'
+import { ReservationInfo as ReservationInfoType } from '../types/ReservationContextTypes'
 
 enum ACTIONS {
   setDate = 'setDate',
@@ -13,19 +13,19 @@ export type ReservationAction = {
 }
 export type ReservationActions = {
   setDate: (
-    state: ReservationContextType,
+    state: ReservationInfoType,
     action: ReservationAction
-  ) => ReservationContextType
+  ) => ReservationInfoType
   setTime: (
-    state: ReservationContextType,
+    state: ReservationInfoType,
     action: ReservationAction
-  ) => ReservationContextType
+  ) => ReservationInfoType
   setTable: (
-    state: ReservationContextType,
+    state: ReservationInfoType,
     action: ReservationAction
-  ) => ReservationContextType
+  ) => ReservationInfoType
   setPersonalData: (
-    state: ReservationContextType,
+    state: ReservationInfoType,
     action: ReservationAction
-  ) => ReservationContextType
+  ) => ReservationInfoType
 }
