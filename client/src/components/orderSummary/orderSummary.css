@@ -1,0 +1,170 @@
+.orderSummary {
+  font-family: sans-serif;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ddd;
+  font-weight: bold;
+  width: 70%;
+}
+.orderSummary__container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.orderSummary__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+.orderSummary__dateInfo {
+  display: flex;
+  align-items: center;
+}
+.orderSummary__dateItem {
+  display: flex;
+}
+.orderSummary__icon {
+  margin-right: 7px;
+}
+.orderSummary__date {
+  margin-right: 15px;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+.orderSummary__changeDateButton {
+  border: none;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.orderSummary__orderEdit {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+.orderSummary__title {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+.orderSummary__editButton {
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  font-weight: 400;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.orderSummary__reservationInfo {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(221, 221, 221, 0.1);
+  color: white;
+  padding: 10px;
+}
+.orderSummary__reservationInfoItem {
+  margin: 5px 0px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 10px;
+}
+.text {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.orderSummary__addSeatsButton {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orderSummary__personalDataForm {
+  margin-top: 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+.orderSummary__formItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.orderSummary_formIconItem {
+  margin-bottom: 1px solid black;
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.11);
+  color: black;
+}
+.orderSummary__formIcon {
+  color: white;
+}
+.orderSummary__personalDataFormInput,
+.orderSummary__personalDataFormTextArea {
+  font-size: 1rem;
+  text-indent: 10px;
+  color: black;
+  width: 100%;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.459);
+  border: none;
+  outline: none;
+}
+.orderSummary__personalDataFormTextArea {
+  line-height: 2em;
+  height: 70px;
+  margin-top: 10px;
+}
+
+.orderSummary__personalDataFormButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+  border: none;
+  background-color: green;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  padding: 10px 0px;
+}
+.orderSummary__termAccept {
+  margin-top: 20px;
+  display: flex;
+}
+.termText {
+  font-size: 0.7rem;
+  font-weight: 400;
+}
