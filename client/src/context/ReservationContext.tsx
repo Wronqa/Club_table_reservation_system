@@ -21,6 +21,7 @@ export const ReservationContext = createContext<ReservationContextType>({
 export const ReservationContextProvider = ({
   children,
 }: ReservationContextPropsType) => {
+  
   const [state, dispatch] = useReducer(ReservationReducer, INITIAL_STATE)
   return (
     <ReservationContext.Provider value={{ state, dispatch }}>

@@ -21,7 +21,7 @@ export const config = {
       coords: [153, 50, 193, 90],
     },
     {
-      id: '2',
+      id: '3',
       title: 'Table 2 - 6 persons',
       shape: 'rect',
       name: '2',
@@ -30,7 +30,7 @@ export const config = {
       coords: [190, 50, 223, 90],
     },
     {
-      id: '2',
+      id: '4',
       title: 'Table 2 - 6 persons',
       shape: 'rect',
       name: '2',

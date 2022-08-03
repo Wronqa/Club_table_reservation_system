@@ -5,11 +5,11 @@ export type ReservationContextProps = {
   children: ReactNode
 }
 export enum HOURS {
-  '21:00',
-  '21:30',
-  '22:00',
-  '22:30',
-  '23:300',
+  '21:00' = '21:00',
+  '21:30' = '21:30',
+  '22:00' = '22:00',
+  '22:30' = '22:30',
+  '23:00' = '23:00',
 }
 export type PersonalData = {
   name: string

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined'
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
@@ -10,8 +10,10 @@ import PersonIcon from '@mui/icons-material/Person'
 import AddIcon from '@mui/icons-material/Add'
 import CheckIcon from '@mui/icons-material/Check'
 import './orderSummary.css'
+import { ReservationContext } from '../../context/ReservationContext'
 
 export const OrderSummary = () => {
+  const { state } = useContext(ReservationContext)
   return (
     <div className='orderSummary'>
       <div className='orderSummary__container'>
@@ -19,11 +21,13 @@ export const OrderSummary = () => {
           <div className='orderSummary__dateInfo'>
             <div className='orderSummary__dateItem'>
               <EventNoteOutlinedIcon className='orderSummary__icon' />
-              <span className='orderSummary__date'>2022/08/02</span>
+              <span className='orderSummary__date'>
+                {state.date?.toString()}
+              </span>
             </div>
             <div className='orderSummary__dateItem'>
               <AccessTimeOutlinedIcon className='orderSummary__icon' />
-              <span className='orderSummary__date'>21:30</span>
+              <span className='orderSummary__date'>{state.time}</span>
             </div>
           </div>
           <button className='orderSummary__changeDateButton'>

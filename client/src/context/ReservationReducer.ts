@@ -7,5 +7,5 @@ export const ReservationReducer = (
   action: ReservationActionType
 ) => {
   const handler = ReservationActions[action.type]
-  return handler(state, action)
+  return handler ? handler(state, action) : state
 }
