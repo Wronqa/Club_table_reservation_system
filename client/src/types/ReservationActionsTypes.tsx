@@ -9,7 +9,7 @@ export enum ACTIONS {
 }
 export type ReservationAction = {
   type: ACTIONS
-  payload: HOURS | Date | number | PersonalData
+  payload: HOURS | Date | number | PersonalData | null
 }
 export type ReservationActions = {
   setDate: (

@@ -12,9 +12,18 @@ import CheckIcon from '@mui/icons-material/Check'
 import './orderSummary.css'
 import { ReservationContext } from '../../context/ReservationContext'
 import { formatDate } from '../../utils/dateFormatter'
+import { ACTIONS } from '../../types/ReservationActionsTypes'
 
 export const OrderSummary = () => {
-  const { state } = useContext(ReservationContext)
+  const { state, dispatch } = useContext(ReservationContext)
+
+  const changeDateHandler = () => {
+    dispatch({ type: ACTIONS.setDate, payload: null })
+    dispatch({ type: ACTIONS.setTime, payload: null })
+  }
+  const orderEditHandler = () => {
+    dispatch({ type: ACTIONS.setTable, payload: null })
+  }
   return (
     <div className='orderSummary'>
       <div className='orderSummary__container'>
@@ -31,7 +40,10 @@ export const OrderSummary = () => {
               <span className='orderSummary__date'>{state.time}</span>
             </div>
           </div>
-          <button className='orderSummary__changeDateButton'>
+          <button
+            className='orderSummary__changeDateButton'
+            onClick={changeDateHandler}
+          >
             Change date
           </button>
         </div>
@@ -40,7 +52,9 @@ export const OrderSummary = () => {
             <ShoppingCartOutlinedIcon className='orderSummary__icon' />
             Your order
           </span>
-          <span className='orderSummary__editButton'>Edit order</span>
+          <span className='orderSummary__editButton' onClick={orderEditHandler}>
+            Edit order
+          </span>
         </div>
         <div className='orderSummary__reservationInfo'>
           <div className='orderSummary__reservationInfoItem'>
