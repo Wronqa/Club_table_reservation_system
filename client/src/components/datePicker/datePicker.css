@@ -15,3 +15,7 @@
   color: white;
   opacity: 1;
 }
+.fc-day:hover {
+  background: rgba(221, 221, 221, 0.527);
+  cursor: pointer;
+}

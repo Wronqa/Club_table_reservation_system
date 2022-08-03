@@ -4,14 +4,15 @@ import ImageMapper, { AreaEvent, CustomArea } from 'react-img-mapper'
 import { config } from '../../utils/tablePickerConfig'
 import { ACTIONS } from '../../types/ReservationActionsTypes'
 import { ReservationContext } from '../../context/ReservationContext'
+import { Area as AreaType } from '../../types/TablePickerTypes'
 
 export const TablePicker = () => {
   const [tableName, setTableName] = useState('')
 
   const { dispatch } = useContext(ReservationContext)
 
-  const handleHover = (area: any, index: number, event: AreaEvent) => {
-    setTableName(area.title)
+  const handleHover = (area: AreaType, index: number, event: AreaEvent) => {
+    setTableName(area.title as string)
   }
   const handleClick = (area: CustomArea, index: number, event: AreaEvent) => {
     dispatch({ type: ACTIONS.setTable, payload: Number(area.id) })

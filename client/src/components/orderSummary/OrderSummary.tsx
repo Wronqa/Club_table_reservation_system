@@ -11,6 +11,7 @@ import AddIcon from '@mui/icons-material/Add'
 import CheckIcon from '@mui/icons-material/Check'
 import './orderSummary.css'
 import { ReservationContext } from '../../context/ReservationContext'
+import { formatDate } from '../../utils/dateFormatter'
 
 export const OrderSummary = () => {
   const { state } = useContext(ReservationContext)
@@ -22,7 +23,7 @@ export const OrderSummary = () => {
             <div className='orderSummary__dateItem'>
               <EventNoteOutlinedIcon className='orderSummary__icon' />
               <span className='orderSummary__date'>
-                {state.date?.toString()}
+                {formatDate(state.date as Date)}
               </span>
             </div>
             <div className='orderSummary__dateItem'>

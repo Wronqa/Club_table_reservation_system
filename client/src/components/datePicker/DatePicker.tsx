@@ -7,9 +7,9 @@ import { ReservationContext } from '../../context/ReservationContext'
 import { ACTIONS } from '../../types/ReservationActionsTypes'
 
 export const DatePicker = () => {
-  const clickHandler = function (info: any) {
-    dispatch({ type: ACTIONS.setDate, payload: info.dateStr as Date })
-    console.log(new Date(info.dateStr))
+  const date = new Date()
+  const clickHandler = function (info: DateClickArg) {
+    dispatch({ type: ACTIONS.setDate, payload: new Date(info.dateStr) })
   }
 
   const { state, dispatch } = useContext(ReservationContext)
