@@ -16,13 +16,15 @@ export type PersonalData = {
   phoneNumber: string
   emailAddress: string
 }
-export type ReservationInfo = {
+export type InitialState = {
   date: Date | null
   time: HOURS | null
   table: number | null
   personalData: PersonalData | null
+  isFetching: boolean
+  error: Error | null
 }
 export type ReservationContext = {
-  state: ReservationInfo
+  state: InitialState
   dispatch: Dispatch<ReservationAction>
 }

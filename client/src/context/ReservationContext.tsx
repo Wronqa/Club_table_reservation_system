@@ -2,15 +2,17 @@ import { createContext, useReducer } from 'react'
 import {
   ReservationContext as ReservationContextType,
   ReservationContextProps as ReservationContextPropsType,
-  ReservationInfo as ReservationInfoType,
+  InitialState as InitialStateType,
 } from '../types/ReservationContextTypes'
 import { ReservationReducer } from './ReservationReducer'
 
-const INITIAL_STATE: ReservationInfoType = {
+const INITIAL_STATE: InitialStateType = {
   date: null,
   time: null,
   table: null,
   personalData: null,
+  isFetching: false,
+  error: null,
 }
 
 export const ReservationContext = createContext<ReservationContextType>({
@@ -21,7 +23,6 @@ export const ReservationContext = createContext<ReservationContextType>({
 export const ReservationContextProvider = ({
   children,
 }: ReservationContextPropsType) => {
-  
   const [state, dispatch] = useReducer(ReservationReducer, INITIAL_STATE)
   return (
     <ReservationContext.Provider value={{ state, dispatch }}>

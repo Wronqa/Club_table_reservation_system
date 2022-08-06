@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.6.4"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "node ./build/server.js",
+    "dev": "nodemon ./build/server.js"
+  }
+}
