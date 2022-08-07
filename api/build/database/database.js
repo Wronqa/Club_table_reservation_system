@@ -8,15 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const runQuery = require('../config/database');
-exports.tablesController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const sql = require('mssql');
+const config = require('../config/sqlConfig');
+const connect = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const pool = yield runQuery('Select * from "table";');
-        console.log(pool);
+        yield sql.connect(config);
     }
     catch (err) {
         console.log(err);
     }
-    res.status(200).json('okej');
 });
+module.exports = connect;
