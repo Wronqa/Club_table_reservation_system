@@ -6,6 +6,7 @@ import { ACTIONS } from '../../types/ReservationActionsTypes'
 import { ReservationContext } from '../../context/ReservationContext'
 import { Area as AreaType } from '../../types/TablePickerTypes'
 import { getAllTablesCall } from '../../apiCalls/tablesCalls'
+import { formatConfig } from '../../utils/mapperConfigFormatter'
 
 export const TablePicker = () => {
   const [tables, setTables] = useState<Object | null>(null)
@@ -25,7 +26,7 @@ export const TablePicker = () => {
 
     const loadTables = async () => {
       const res = await getAllTablesCall(dispatch)
-      console.log(res)
+      const validConfig = formatConfig(res.data) ///Zmien na config
     }
     loadTables()
     return () => {
