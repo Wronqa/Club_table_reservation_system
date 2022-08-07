@@ -8,14 +8,17 @@ import { Area as AreaType } from '../../types/TablePickerTypes'
 import { getAllTablesCall } from '../../apiCalls/tablesCalls'
 import { formatConfig } from '../../utils/mapperConfigFormatter'
 
+////PROBLEM Z TYPEM
+
 export const TablePicker = () => {
-  const [tables, setTables] = useState<Object | null>(null)
+  const [mapperConfig, setMapperConfig] = useState<any | null>(null)
   const [tableName, setTableName] = useState('')
+  const [isLoading, setLoading] = useState<boolean>(true)
 
   const { dispatch } = useContext(ReservationContext)
 
   const handleHover = (area: AreaType, index: number, event: AreaEvent) => {
-    setTableName(area.title as string)
+    setTableName(area.name as string)
   }
   const handleClick = (area: CustomArea, index: number, event: AreaEvent) => {
     dispatch({ type: ACTIONS.setTable, payload: Number(area.id) })
@@ -26,7 +29,13 @@ export const TablePicker = () => {
 
     const loadTables = async () => {
       const res = await getAllTablesCall(dispatch)
-      const validConfig = formatConfig(res.data) ///Zmien na config
+      console.log(res)
+      console.log(isLoading)
+
+      if (res) {
+        const validConfig = formatConfig(res.data[0]) ///Zmien na config
+        isMounted && setMapperConfig(validConfig)
+      }
     }
     loadTables()
     return () => {
@@ -34,22 +43,30 @@ export const TablePicker = () => {
     }
   }, [])
 
+  useEffect(() => {
+    mapperConfig && setLoading(false)
+  }, [mapperConfig])
+
   return (
-    <div className='tablePicker'>
-      <h1 className='tablePicker__title'>Please select the table</h1>
+    <>
+      {!isLoading && (
+        <div className='tablePicker'>
+          <h1 className='tablePicker__title'>Please select the table</h1>
 
-      <ImageMapper
-        src={require('../../images/club.png')}
-        map={config}
-        width={650}
-        height={350}
-        onMouseEnter={handleHover}
-        onClick={handleClick}
-      />
+          <ImageMapper
+            src={require('../../images/club.png')}
+            map={mapperConfig}
+            width={650}
+            height={350}
+            onMouseEnter={handleHover}
+            onClick={handleClick}
+          />
 
-      <div className='tablePicker__tableInfo'>
-        <span className='tablePicker__tableName'>{tableName}</span>
-      </div>
-    </div>
+          <div className='tablePicker__tableInfo'>
+            <span className='tablePicker__tableName'>{tableName}</span>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
