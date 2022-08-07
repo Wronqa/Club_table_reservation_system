@@ -6,10 +6,12 @@ export enum ACTIONS {
   setTime = 'setTime',
   setTable = 'setTable',
   setPersonalData = 'setPersonalData',
+  requestStart = 'requestStart',
+  requestError = 'requestError',
 }
 export type ReservationAction = {
   type: ACTIONS
-  payload: HOURS | Date | number | PersonalData | null
+  payload?: HOURS | Date | number | PersonalData | null
 }
 export type ReservationActions = {
   setDate: (state: InitialState, action: ReservationAction) => InitialState
@@ -19,4 +21,6 @@ export type ReservationActions = {
     state: InitialState,
     action: ReservationAction
   ) => InitialState
+  requestStart: (state: InitialState) => InitialState
+  requestError: (state: InitialState) => InitialState
 }

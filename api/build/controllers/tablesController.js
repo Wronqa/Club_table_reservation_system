@@ -10,13 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const runQuery = require('../config/database');
+const selectTables = require('../queries/selectTables');
 exports.tablesController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const pool = yield runQuery('Select * from "table";');
-        console.log(pool);
+        const result = yield runQuery(selectTables.select);
+        res.status(200).json({
+            success: true,
+            error: null,
+            data: result.recordsets,
+        });
     }
     catch (err) {
-        console.log(err);
+        res.status(500).json({
+            success: false,
+            error: err,
+            data: null,
+        });
     }
-    res.status(200).json('okej');
 });
