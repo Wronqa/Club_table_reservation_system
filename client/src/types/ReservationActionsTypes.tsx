@@ -6,6 +6,7 @@ export enum ACTIONS {
   setTime = 'setTime',
   setTable = 'setTable',
   requestStart = 'requestStart',
+  requestSuccess = 'requestSuccess',
   requestError = 'requestError',
 }
 export type ReservationAction = {
@@ -17,5 +18,6 @@ export type ReservationActions = {
   setTime: (state: InitialState, action: ReservationAction) => InitialState
   setTable: (state: InitialState, action: ReservationAction) => InitialState
   requestStart: (state: InitialState) => InitialState
+  requestSuccess: (state: InitialState) => InitialState
   requestError: (state: InitialState) => InitialState
 }

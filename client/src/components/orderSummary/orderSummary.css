@@ -168,3 +168,8 @@
   font-size: 0.7rem;
   font-weight: 400;
 }
+.orderSummary__error {
+  margin-top: 10px;
+  font-weight: 400;
+  color: red;
+}

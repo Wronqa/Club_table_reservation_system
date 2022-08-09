@@ -9,6 +9,7 @@ export const getAllTablesCall = async (
 
   try {
     const res = await axios.get('/tables')
+    dispatch({ type: ACTIONS.requestStart })
     return res.data
   } catch (err) {
     console.log(err)

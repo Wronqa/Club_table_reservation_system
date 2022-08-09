@@ -14,6 +14,9 @@ export const ReservationActions: ReservationActionsType = {
   requestStart: (state) => {
     return { ...state, isFetching: true }
   },
+  requestSuccess: (state) => {
+    return { ...state, isFetching: false }
+  },
   requestError: (state) => {
     return { ...state, isFetching: false }
   },

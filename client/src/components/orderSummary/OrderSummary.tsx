@@ -20,6 +20,8 @@ import { ReservationContext } from '../../context/ReservationContext'
 import { formatDate } from '../../utils/dateFormatter'
 import { ACTIONS } from '../../types/ReservationActionsTypes'
 import { PersonalData as PersonalDataType } from '../../types/ReservationContextTypes'
+import { validate } from '../../validators/formValidator'
+import { newOrderCall } from '../../apiCalls/orderCalls'
 
 export const OrderSummary = () => {
   const [personalData, setPersonalData] = useState<PersonalDataType>({
@@ -29,6 +31,7 @@ export const OrderSummary = () => {
   })
   const [comment, setComment] = useState<string>('')
   const { state, dispatch } = useContext(ReservationContext)
+  const [error, setError] = useState<string | null>(null)
 
   const changeDateHandler = () => {
     dispatch({ type: ACTIONS.setDate, payload: null })
@@ -38,10 +41,22 @@ export const OrderSummary = () => {
     dispatch({ type: ACTIONS.setTable, payload: null })
   }
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    console.log(personalData)
+    const validTest = validate(personalData)
+
+    if (validTest.error) {
+      setError(validTest.error)
+    } else {
+      const res = await newOrderCall(
+        state,
+        personalData,
+        dispatch,
+        comment ? comment : null
+      )
+      console.log(res)
+    }
 
     ///dispatch({type:ACTIONS.setPersonalData, payload:})
   }
@@ -175,6 +190,7 @@ export const OrderSummary = () => {
             use cookies.
           </span>
         </div>
+        <span className='orderSummary__error'>{error}</span>
       </div>
     </div>
   )
