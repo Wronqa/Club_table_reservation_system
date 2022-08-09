@@ -10,7 +10,6 @@ const INITIAL_STATE: InitialStateType = {
   date: null,
   time: null,
   table: null,
-  personalData: null,
   isFetching: false,
   error: null,
 }

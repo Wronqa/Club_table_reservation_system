@@ -20,7 +20,6 @@ export type InitialState = {
   date: Date | null
   time: HOURS | null
   table: number | null
-  personalData: PersonalData | null
   isFetching: boolean
   error: Error | null
 }

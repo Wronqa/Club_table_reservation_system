@@ -1,4 +1,10 @@
-import React, { useContext } from 'react'
+import React, {
+  ChangeEvent,
+  FormEvent,
+  FormEventHandler,
+  useContext,
+  useState,
+} from 'react'
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined'
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
@@ -13,8 +19,15 @@ import './orderSummary.css'
 import { ReservationContext } from '../../context/ReservationContext'
 import { formatDate } from '../../utils/dateFormatter'
 import { ACTIONS } from '../../types/ReservationActionsTypes'
+import { PersonalData as PersonalDataType } from '../../types/ReservationContextTypes'
 
 export const OrderSummary = () => {
+  const [personalData, setPersonalData] = useState<PersonalDataType>({
+    name: '',
+    phoneNumber: '',
+    emailAddress: '',
+  })
+  const [comment, setComment] = useState<string>('')
   const { state, dispatch } = useContext(ReservationContext)
 
   const changeDateHandler = () => {
@@ -23,6 +36,14 @@ export const OrderSummary = () => {
   }
   const orderEditHandler = () => {
     dispatch({ type: ACTIONS.setTable, payload: null })
+  }
+
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    console.log(personalData)
+
+    ///dispatch({type:ACTIONS.setPersonalData, payload:})
   }
   return (
     <div className='orderSummary'>
@@ -74,7 +95,10 @@ export const OrderSummary = () => {
         <span className='orderSummary__addSeatsButton'>
           <AddIcon className='orderSummary__icon' /> Add more seats
         </span>
-        <form className='orderSummary__personalDataForm'>
+        <form
+          className='orderSummary__personalDataForm'
+          onSubmit={submitHandler}
+        >
           <div className='orderSummary__formItem'>
             <div className='orderSummary_formIconItem'>
               <PersonIcon className='orderSummary__formIcon' />
@@ -83,6 +107,13 @@ export const OrderSummary = () => {
             <input
               className='orderSummary__personalDataFormInput'
               placeholder='Name'
+              value={personalData.name}
+              onChange={(e: FormEvent<HTMLInputElement>) =>
+                setPersonalData({
+                  ...personalData,
+                  name: e.currentTarget.value,
+                })
+              }
               type='text'
             />
           </div>
@@ -95,6 +126,13 @@ export const OrderSummary = () => {
             <input
               className='orderSummary__personalDataFormInput'
               placeholder='Email address'
+              value={personalData.emailAddress}
+              onChange={(e: FormEvent<HTMLInputElement>) =>
+                setPersonalData({
+                  ...personalData,
+                  emailAddress: e.currentTarget.value,
+                })
+              }
               type='text'
             />
           </div>
@@ -106,12 +144,23 @@ export const OrderSummary = () => {
             <input
               className='orderSummary__personalDataFormInput'
               placeholder='Phone number'
+              value={personalData.phoneNumber}
+              onChange={(e: FormEvent<HTMLInputElement>) =>
+                setPersonalData({
+                  ...personalData,
+                  phoneNumber: e.currentTarget.value,
+                })
+              }
               type='text'
             />
           </div>
           <textarea
             className='orderSummary__personalDataFormTextArea'
             placeholder='Comment'
+            value={comment}
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+              setComment(e.currentTarget.value)
+            }
           />
           <button className='orderSummary__personalDataFormButton'>
             <CheckIcon className='orderSummary__icon' />

@@ -8,7 +8,7 @@ import { ReservationContext } from './context/ReservationContext'
 
 function App() {
   const { state, dispatch } = useContext(ReservationContext)
-  const { date, time, table, personalData } = state
+  const { date, time, table } = state
 
   console.log(state)
   const renderElement = () => {

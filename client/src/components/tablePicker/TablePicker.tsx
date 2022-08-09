@@ -9,6 +9,7 @@ import { getAllTablesCall } from '../../apiCalls/tablesCalls'
 import { formatConfig } from '../../utils/mapperConfigFormatter'
 
 ////PROBLEM Z TYPEM
+///Gdy już wybierzesz wolne stoliki dodaj wszystkie properties których brakuje i spróbuj zrobic ten typ 
 
 export const TablePicker = () => {
   const [mapperConfig, setMapperConfig] = useState<any | null>(null)

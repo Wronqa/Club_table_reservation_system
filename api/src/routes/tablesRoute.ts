@@ -1,8 +1,8 @@
 import { ModuleResolutionKind } from 'typescript'
 
 const router = require('express').Router()
-const { tablesController } = require('../controllers/tablesController')
+const { getAllTables } = require('../controllers/tablesController')
 
-router.route('/').get(tablesController)
+router.route('/').get(getAllTables)
 
 module.exports = router

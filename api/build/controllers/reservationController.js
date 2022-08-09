@@ -9,22 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const runQuery = require('../config/database');
-const selectTables = require('../queries/selectTables');
-exports.getAllTables = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const result = yield runQuery(selectTables.select);
-        res.status(200).json({
-            success: true,
-            error: null,
-            data: result.recordsets,
-        });
-    }
-    catch (err) {
-        res.status(500).json({
-            success: false,
-            error: err,
-            data: null,
-        });
-    }
+const express_validator_1 = require("express-validator");
+exports.newOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const errors = (0, express_validator_1.validationResult)(req);
+    console.log(errors);
+    res.status(200).json('okejh');
 });

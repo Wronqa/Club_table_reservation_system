@@ -1,8 +1,10 @@
 {
   "dependencies": {
     "@types/mssql": "^8.0.3",
+    "body-parser": "^1.20.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-validator": "^6.14.2",
     "fs": "^0.0.1-security",
     "mssql": "^8.1.2",
     "mysql2": "^2.3.3",
