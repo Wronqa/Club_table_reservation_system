@@ -55,7 +55,6 @@ export const OrderSummary = () => {
         dispatch,
         comment ? comment : null
       )
-      console.log(res)
     }
 
     ///dispatch({type:ACTIONS.setPersonalData, payload:})

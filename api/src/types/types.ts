@@ -10,3 +10,11 @@ export type PersonalDataType = {
   emailAddress: string
   phoneNumber: string
 }
+export type TableType = {
+  id: number
+  name?: string
+  coords?: string
+  seats?: string
+  price?: number
+  available?: boolean
+}

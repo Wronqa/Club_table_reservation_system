@@ -9,32 +9,35 @@ import { getAllTablesCall } from '../../apiCalls/tablesCalls'
 import { formatConfig } from '../../utils/mapperConfigFormatter'
 
 ////PROBLEM Z TYPEM
-///Gdy już wybierzesz wolne stoliki dodaj wszystkie properties których brakuje i spróbuj zrobic ten typ 
+///Gdy już wybierzesz wolne stoliki dodaj wszystkie properties których brakuje i spróbuj zrobic ten typ
 
 export const TablePicker = () => {
   const [mapperConfig, setMapperConfig] = useState<any | null>(null)
   const [tableName, setTableName] = useState('')
   const [isLoading, setLoading] = useState<boolean>(true)
 
-  const { dispatch } = useContext(ReservationContext)
+  const { state, dispatch } = useContext(ReservationContext)
 
   const handleHover = (area: AreaType, index: number, event: AreaEvent) => {
-    setTableName(area.name as string)
+    let name = `${area.name}  |  ${area.seats} persons  |   ${area.price} PLN`
+    if (!area.available) {
+      name += ' - TAKEN'
+    }
+    setTableName(name as string)
   }
-  const handleClick = (area: CustomArea, index: number, event: AreaEvent) => {
-    dispatch({ type: ACTIONS.setTable, payload: Number(area.id) })
+  const handleClick = (area: AreaType, index: number, event: AreaEvent) => {
+    if (area.available)
+      dispatch({ type: ACTIONS.setTable, payload: Number(area.id) })
   }
 
   useEffect(() => {
     let isMounted = true
 
     const loadTables = async () => {
-      const res = await getAllTablesCall(dispatch)
-      console.log(res)
-      console.log(isLoading)
+      const res = await getAllTablesCall(dispatch, state.date as Date)
 
       if (res) {
-        const validConfig = formatConfig(res.data[0]) ///Zmien na config
+        const validConfig = formatConfig(res.data) ///Zmien na config
         isMounted && setMapperConfig(validConfig)
       }
     }
@@ -64,7 +67,16 @@ export const TablePicker = () => {
           />
 
           <div className='tablePicker__tableInfo'>
-            <span className='tablePicker__tableName'>{tableName}</span>
+            <span
+              style={
+                tableName.includes('TAKEN')
+                  ? { color: 'crimson' }
+                  : { color: 'rgba(13, 202, 13, 0.822)' }
+              }
+              className='tablePicker__tableName'
+            >
+              {tableName}
+            </span>
           </div>
         </div>
       )}

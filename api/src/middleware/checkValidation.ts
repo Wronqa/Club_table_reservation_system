@@ -23,14 +23,12 @@ const checkValidation = (req: Request) => {
       .isNumeric()
       .escape()
       .withMessage('Invalid phone'),
-    body('reservationInfo.date')
-      .escape()
-      .custom((value: string) => {
-        if (!moment(value, 'MM-DD-YYYY', true).isValid())
-          throw new Error('Invalid date form')
+    body('reservationInfo.date').custom((value: string) => {
+      if (!moment(value, 'YYYY-MM-DD', true).isValid())
+        throw new Error('Invalid date form')
 
-        return true
-      }),
+      return true
+    }),
     body('reservationInfo.time').trim().notEmpty().escape(),
     body('reservationInfo.table_id').trim().notEmpty().isNumeric().escape(),
     body('reservationInfo.comment').optional().escape(),

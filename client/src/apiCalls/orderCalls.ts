@@ -19,11 +19,14 @@ export const newOrderCall = async (
     const res = await axios.post('/reservation', {
       personalData,
       comment,
-      reservationInfo: { date, time, table },
+      reservationInfo: { date, time, table_id: table },
     })
+
+    console.log(res)
 
     dispatch({ type: ACTIONS.requestSuccess })
   } catch (err) {
+    console.log(err)
     dispatch({ type: ACTIONS.requestError })
   }
 }

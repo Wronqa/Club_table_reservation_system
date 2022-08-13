@@ -11,13 +11,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const runQuery = require('../config/database');
 const { tableQueries } = require('../queries/tableQueries');
+const { validator } = require('express-validator');
+const moment = require('moment');
+const tableFilter = require('../utils/tableFilter');
 exports.getAllTables = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const date = req.query.date;
     try {
-        const result = yield runQuery(tableQueries.selectAll);
+        if (!moment(date, 'YYYY-MM-DD', true).isValid())
+            throw 'Invalid date format';
+        const tables = yield runQuery(tableQueries.selectAll);
+        const taken = yield runQuery(tableQueries.selectTaken(date));
+        const filteredTables = tableFilter(tables.recordsets, taken.recordsets);
         res.status(200).json({
             success: true,
             error: null,
-            data: result.recordsets,
+            data: filteredTables,
         });
     }
     catch (err) {

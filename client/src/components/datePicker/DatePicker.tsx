@@ -1,15 +1,14 @@
 import './datePicker.css'
 import { useContext } from 'react'
-import FullCalendar from '@fullcalendar/react' // must go before plugins
+import FullCalendar, { formatDate } from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction' // for selectable
 import { ReservationContext } from '../../context/ReservationContext'
 import { ACTIONS } from '../../types/ReservationActionsTypes'
 
 export const DatePicker = () => {
-  const date = new Date()
   const clickHandler = function (info: DateClickArg) {
-    dispatch({ type: ACTIONS.setDate, payload: new Date(info.dateStr) })
+    dispatch({ type: ACTIONS.setDate, payload: info.dateStr })
   }
 
   const { state, dispatch } = useContext(ReservationContext)

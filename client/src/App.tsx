@@ -10,7 +10,6 @@ function App() {
   const { state, dispatch } = useContext(ReservationContext)
   const { date, time, table } = state
 
-  console.log(state)
   const renderElement = () => {
     if (!date) return <DatePicker />
     else if (!time) return <TimePicker />

@@ -37,8 +37,10 @@
   letter-spacing: 1px;
 }
 .tablePicker__tableName {
-  color: rgba(13, 202, 13, 0.822);
   font-weight: 400;
   letter-spacing: 1px;
   font-size: 1rem;
+}
+.test {
+  background-color: rgba(0, 128, 0, 0.514);
 }

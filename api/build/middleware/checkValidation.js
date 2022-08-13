@@ -23,10 +23,8 @@ const checkValidation = (req) => {
             .isNumeric()
             .escape()
             .withMessage('Invalid phone'),
-        body('reservationInfo.date')
-            .escape()
-            .custom((value) => {
-            if (!moment(value, 'MM-DD-YYYY', true).isValid())
+        body('reservationInfo.date').custom((value) => {
+            if (!moment(value, 'YYYY-MM-DD', true).isValid())
                 throw new Error('Invalid date form');
             return true;
         }),
