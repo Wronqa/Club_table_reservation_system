@@ -10,9 +10,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_validator_1 = require("express-validator");
+const clientQueries = require('../queries/clientQueries');
+const orderQueries = require('../queries/orderQueries');
+const runQuery = require('../config/database');
+const checkAvailability = require('../utils/availabilityChecker');
 exports.newOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = (0, express_validator_1.validationResult)(req);
-    console.log(errors);
-    console.log(req.body);
-    res.status(200).json('okejh');
+    if (!errors.isEmpty()) {
+        return res.status(500).json({
+            success: false,
+            error: errors,
+            data: null,
+        });
+    }
+    const { personalData, reservationInfo } = req.body;
+    try {
+        yield checkAvailability(reservationInfo.table_id, reservationInfo.date);
+        const client = yield runQuery(clientQueries.insert(personalData));
+        const id = client.recordsets[0][0];
+        const result = yield runQuery(orderQueries.insert(Object.assign(Object.assign({}, reservationInfo), { client_id: id.id })));
+        res.status(200).json({
+            success: true,
+            error: null,
+            data: 'Reservation successfully',
+        });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            error: err,
+            data: null,
+        });
+    }
 });

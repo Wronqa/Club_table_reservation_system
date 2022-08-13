@@ -1,5 +1,6 @@
 const { check, body, param } = require('express-validator')
 const { validator } = require('express-validator')
+const moment = require('moment')
 import { Request, Response, NextFunction } from 'express'
 
 const checkValidation = (req: Request) => {
@@ -14,6 +15,7 @@ const checkValidation = (req: Request) => {
       .trim()
       .isEmail()
       .normalizeEmail()
+      .escape()
       .withMessage('Invalid email'),
     body('personalData.phoneNumber')
       .trim()
@@ -21,10 +23,17 @@ const checkValidation = (req: Request) => {
       .isNumeric()
       .escape()
       .withMessage('Invalid phone'),
-    body('reservationInfo.date').trim().notEmpty().escape(),
+    body('reservationInfo.date')
+      .escape()
+      .custom((value: string) => {
+        if (!moment(value, 'MM-DD-YYYY', true).isValid())
+          throw new Error('Invalid date form')
+
+        return true
+      }),
     body('reservationInfo.time').trim().notEmpty().escape(),
-    body('reservationInfo.table').trim().notEmpty().isNumeric().escape(),
-    body('comment').optional().escape(),
+    body('reservationInfo.table_id').trim().notEmpty().isNumeric().escape(),
+    body('reservationInfo.comment').optional().escape(),
   ]
 }
 

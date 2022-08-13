@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
 const runQuery = require('../config/database')
-const selectTables = require('../queries/selectTables')
+const { tableQueries } = require('../queries/tableQueries')
 
 exports.getAllTables = async (req: Request, res: Response) => {
   try {
-    const result = await runQuery(selectTables.select)
+    const result = await runQuery(tableQueries.selectAll)
 
     res.status(200).json({
       success: true,

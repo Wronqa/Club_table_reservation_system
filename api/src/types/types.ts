@@ -5,3 +5,8 @@ export type OrderType = {
   client_id: number
   comment: string
 }
+export type PersonalDataType = {
+  name: string
+  emailAddress: string
+  phoneNumber: string
+}

@@ -10,21 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const runQuery = require('../config/database');
-const { tableQueries } = require('../queries/tableQueries');
-exports.getAllTables = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const result = yield runQuery(tableQueries.selectAll);
-        res.status(200).json({
-            success: true,
-            error: null,
-            data: result.recordsets,
-        });
-    }
-    catch (err) {
-        res.status(500).json({
-            success: false,
-            error: err,
-            data: null,
-        });
+const tableQueries_1 = require("../queries/tableQueries");
+const checkAvailability = (id, date) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield runQuery(tableQueries_1.tableQueries.checkAvailability(id, date));
+    if (result.rowsAffected[0] !== 0) {
+        throw 'This table is not available';
     }
 });
+module.exports = checkAvailability;
