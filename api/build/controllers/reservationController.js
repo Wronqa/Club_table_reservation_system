@@ -9,13 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const tableQueries_1 = require("./../queries/tableQueries");
 const express_validator_1 = require("express-validator");
+const reservationSummaryMessage_1 = require("../templates/reservationSummaryMessage");
 const clientQueries = require('../queries/clientQueries');
 const orderQueries = require('../queries/orderQueries');
 const runQuery = require('../config/database');
 const checkAvailability = require('../utils/availabilityChecker');
 const sendEmail = require('../utils/mailSender');
 const { v4: uuidv4 } = require('uuid');
+const formatName = require('../utils/tableNameFormatter');
 exports.newOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
@@ -30,12 +33,23 @@ exports.newOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         yield checkAvailability(reservationInfo.table_id, reservationInfo.date);
         const client = yield runQuery(clientQueries.insert(personalData));
         const id = client.recordsets[0][0];
-        const result = yield runQuery(orderQueries.insert(Object.assign(Object.assign({}, reservationInfo), { client_id: id.id, public_id: uuidv4() })));
+        const public_id = uuidv4();
+        const result = yield runQuery(orderQueries.insert(Object.assign(Object.assign({}, reservationInfo), { client_id: id.id, public_id })));
+        const table = yield runQuery(tableQueries_1.tableQueries.selectTableName(reservationInfo.table_id));
+        const tableName = formatName(table);
+        const message = (0, reservationSummaryMessage_1.getReservationSummaryMessage)({
+            name: personalData.name,
+            phone: personalData.phoneNumber,
+            tableName: tableName,
+            date: reservationInfo.date,
+            time: reservationInfo.time,
+            link: `${process.env.CLIENT_URL}/${public_id}`,
+        });
         const mail = yield sendEmail({
-            from: 'clubreservationsystem@gmail.com',
-            to: 'kuba.wrona@onet.pl',
-            subject: 'test',
-            text: 'test',
+            from: process.env.MAIL_USERNAME,
+            to: personalData.emailAddress,
+            subject: 'Your order confirmation',
+            html: message,
         });
         res.status(200).json({
             success: true,

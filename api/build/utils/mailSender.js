@@ -18,12 +18,7 @@ const sendEmail = (details) => __awaiter(void 0, void 0, void 0, function* () {
             pass: process.env.MAIL_PASSWORD,
         },
     });
-    const mailOptions = {
-        from: details.from,
-        to: details.to,
-        subject: details.subject,
-        text: details.text,
-    };
+    const mailOptions = Object.assign({}, details);
     transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
             console.log(err);
