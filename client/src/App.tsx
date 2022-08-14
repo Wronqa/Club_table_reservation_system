@@ -7,6 +7,7 @@ import { OrderSummary } from './components/orderSummary/OrderSummary'
 import { ReservationContext } from './context/ReservationContext'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { OrderSuccess } from './components/orderSuccess/OrderSuccess'
+import { Error } from './pages/error/Error'
 
 function App() {
   const { state, dispatch } = useContext(ReservationContext)
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path='/' element={renderElement()} />
           <Route path='/order-success' element={<OrderSuccess />} />
+          <Route path='*' element={<Error />} />
         </Routes>
       </BrowserRouter>
     </div>
