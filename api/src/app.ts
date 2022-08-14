@@ -1,3 +1,5 @@
+import { application } from 'express'
+
 require('dotenv').config({ path: __dirname + '/config/.env' })
 const express = require('express')
 const tablesRoute = require('./routes/tablesRoute')

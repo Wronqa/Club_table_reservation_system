@@ -22,6 +22,7 @@ import { ACTIONS } from '../../types/ReservationActionsTypes'
 import { PersonalData as PersonalDataType } from '../../types/ReservationContextTypes'
 import { validate } from '../../validators/formValidator'
 import { newOrderCall } from '../../apiCalls/orderCalls'
+import { useNavigate } from 'react-router-dom'
 
 export const OrderSummary = () => {
   const [personalData, setPersonalData] = useState<PersonalDataType>({
@@ -32,6 +33,8 @@ export const OrderSummary = () => {
   const [comment, setComment] = useState<string>('')
   const { state, dispatch } = useContext(ReservationContext)
   const [error, setError] = useState<string | null>(null)
+
+  const navigate = useNavigate()
 
   const changeDateHandler = () => {
     dispatch({ type: ACTIONS.setDate, payload: null })
@@ -55,6 +58,7 @@ export const OrderSummary = () => {
         dispatch,
         comment ? comment : null
       )
+      if (res?.data.success) navigate('/order-success')
     }
 
     ///dispatch({type:ACTIONS.setPersonalData, payload:})
@@ -178,7 +182,7 @@ export const OrderSummary = () => {
           />
           <button className='orderSummary__personalDataFormButton'>
             <CheckIcon className='orderSummary__icon' />
-            Confirm order
+            Go to payment
           </button>
         </form>
         <div className='orderSummary__termAccept'>

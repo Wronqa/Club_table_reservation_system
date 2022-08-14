@@ -1,0 +1,39 @@
+.orderSuccess {
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.09);
+  height: 150px;
+  border-radius: 5px;
+}
+.orderSuccess__wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.orderSuccess__title {
+  color: #ddd;
+  letter-spacing: 1.5px;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.orderSuccess_body {
+  color: rgba(255, 255, 255, 0.719);
+  margin-top: 5px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.orderSuccess__icon {
+  font-size: 6rem !important;
+  color: green;
+}
+.orderSuccess__desc {
+  margin-left: 20px;
+  width: 90%;
+  color: rgba(255, 255, 255, 0.733);
+  font-weight: 300;
+  letter-spacing: 1.5px;
+}

@@ -9,13 +9,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const stripe = require('stripe');
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 exports.createPaymentSession = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const session = yield stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             mode: 'payment',
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'PLN',
+                        product_data: {
+                            name: 'test',
+                        },
+                        unit_amount: 2000,
+                    },
+                    quantity: 1,
+                },
+            ],
+            success_url: `${process.env.CLIENT_URL}/checkout-success`,
+            cancel_url: `${process.env.CLIENT_URL}/checkout-cancel`,
         });
+        res.send({ url: session.url });
     }
-    catch (err) { }
+    catch (err) {
+        console.log(err);
+    }
 });

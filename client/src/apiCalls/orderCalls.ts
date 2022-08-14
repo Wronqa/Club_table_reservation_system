@@ -22,11 +22,11 @@ export const newOrderCall = async (
       reservationInfo: { date, time, table_id: table },
     })
 
-    console.log(res)
-
     dispatch({ type: ACTIONS.requestSuccess })
+
+    return res
   } catch (err) {
-    console.log(err)
     dispatch({ type: ACTIONS.requestError })
+    return null
   }
 }

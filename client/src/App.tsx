@@ -5,6 +5,8 @@ import { TablePicker } from './components/tablePicker/TablePicker'
 import { TimePicker } from './components/timePicker/TimePicker'
 import { OrderSummary } from './components/orderSummary/OrderSummary'
 import { ReservationContext } from './context/ReservationContext'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { OrderSuccess } from './components/orderSuccess/OrderSuccess'
 
 function App() {
   const { state, dispatch } = useContext(ReservationContext)
@@ -17,7 +19,16 @@ function App() {
     else return <OrderSummary />
   }
 
-  return <div className='App'>{renderElement()}</div>
+  return (
+    <div className='App'>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={renderElement()} />
+          <Route path='/order-success' element={<OrderSuccess />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  )
 }
 
 export default App

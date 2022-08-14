@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config({ path: __dirname + '/config/.env' });
 const express = require('express');
 const tablesRoute = require('./routes/tablesRoute');
