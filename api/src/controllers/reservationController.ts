@@ -4,6 +4,8 @@ const clientQueries = require('../queries/clientQueries')
 const orderQueries = require('../queries/orderQueries')
 const runQuery = require('../config/database')
 const checkAvailability = require('../utils/availabilityChecker')
+const sendEmail = require('../utils/mailSender')
+const { v4: uuidv4 } = require('uuid')
 
 exports.newOrder = async (req: Request, res: Response) => {
   const errors = validationResult(req)
@@ -25,8 +27,19 @@ exports.newOrder = async (req: Request, res: Response) => {
     const id = client.recordsets[0][0]
 
     const result = await runQuery(
-      orderQueries.insert({ ...reservationInfo, client_id: id.id })
+      orderQueries.insert({
+        ...reservationInfo,
+        client_id: id.id,
+        public_id: uuidv4(),
+      })
     )
+
+    const mail = await sendEmail({
+      from: 'clubreservationsystem@gmail.com',
+      to: 'kuba.wrona@onet.pl',
+      subject: 'test',
+      text: 'test',
+    })
 
     res.status(200).json({
       success: true,

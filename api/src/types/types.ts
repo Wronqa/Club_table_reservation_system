@@ -4,6 +4,7 @@ export type OrderType = {
   table_id: number
   client_id: number
   comment: string
+  public_id: string
 }
 export type PersonalDataType = {
   name: string
