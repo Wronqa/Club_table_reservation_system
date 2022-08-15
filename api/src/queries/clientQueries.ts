@@ -1,4 +1,4 @@
-import { OrderType, PersonalDataType } from '../types/types'
+import { PersonalData as PersonalDataType } from '../types/types'
 
 const clientQueries = {
   insert: (data: PersonalDataType) => {

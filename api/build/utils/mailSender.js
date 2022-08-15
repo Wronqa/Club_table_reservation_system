@@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const nodemailer = require('nodemailer');
 const sendEmail = (details) => __awaiter(void 0, void 0, void 0, function* () {
-    ///zmien to any
     const transporter = nodemailer.createTransport({
         service: process.env.MAIL_SERVICE,
         auth: {

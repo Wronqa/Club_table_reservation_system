@@ -1,4 +1,6 @@
-export const getReservationSummaryMessage = (details: any) => {
+import { EmailPatternDetails } from '../types/types'
+
+export const getReservationSummaryMessage = (details: EmailPatternDetails) => {
   ///zmien
   return `<h1>Your order</h1>
     <p>Thank you for your order.</p> <br>

@@ -1,4 +1,4 @@
-import { OrderType } from '../types/types'
+import { Order as OrderType } from '../types/types'
 
 const orderQueries = {
   insert: (data: OrderType) => {
