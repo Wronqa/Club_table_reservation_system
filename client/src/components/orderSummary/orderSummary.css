@@ -86,7 +86,7 @@
   font-weight: 500;
   margin-top: 10px;
 }
-.text {
+.orderSummary__text {
   display: flex;
   align-items: center;
   font-size: 1rem;
@@ -94,17 +94,8 @@
   font-weight: 400;
   text-transform: uppercase;
 }
-.orderSummary__addSeatsButton {
-  margin-top: 10px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .orderSummary__personalDataForm {
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
   align-items: flex-start;
   justify-content: center;

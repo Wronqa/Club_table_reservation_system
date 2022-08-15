@@ -1,11 +1,12 @@
 import { ReservationContext } from '../../context/ReservationContext'
-import './timePicker.css'
-import { MouseEventHandler, useContext } from 'react'
+import { useContext } from 'react'
 import { HOURS } from '../../types/ReservationContextTypes'
 import { ACTIONS } from '../../types/ReservationActionsTypes'
 
+import './timePicker.css'
+
 export const TimePicker = () => {
-  const { state, dispatch } = useContext(ReservationContext)
+  const { dispatch } = useContext(ReservationContext)
 
   const handleClick = (key: string) => {
     dispatch({ type: ACTIONS.setTime, payload: key as HOURS })
@@ -33,7 +34,6 @@ export const TimePicker = () => {
               </li>
             )
           })}
-          {}
         </ul>
       </div>
     </div>

@@ -1,7 +1,6 @@
-import { MapperConfig as MapperConfigType } from '../types/componentsTypes'
+import { MapperConfig as MapperConfigType } from '../types/ComponentsTypes'
 
 export const formatConfig = (config: Array<MapperConfigType>) => {
-  console.log(config)
   const formattedConfig = config.map((item) => {
     return {
       ...item,
@@ -21,4 +20,3 @@ export const formatConfig = (config: Array<MapperConfigType>) => {
   })
   return { name: 'table-map', areas: formattedConfig }
 }
-///Trzeba stworzyc obiekt typu format config

@@ -6,12 +6,11 @@ import { TimePicker } from './components/timePicker/TimePicker'
 import { OrderSummary } from './components/orderSummary/OrderSummary'
 import { ReservationContext } from './context/ReservationContext'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { OrderSuccess } from './components/orderSuccess/OrderSuccess'
-import { Error } from './pages/error/Error'
+import { Error } from './pages/errorPage/Error'
 import OrderDetails from './pages/orderDetails/OrderDetails'
 
 function App() {
-  const { state, dispatch } = useContext(ReservationContext)
+  const { state } = useContext(ReservationContext)
   const { date, time, table } = state
 
   const renderElement = () => {

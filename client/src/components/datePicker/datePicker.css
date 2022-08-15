@@ -6,16 +6,7 @@
   font-weight: 400;
   opacity: 1;
 }
-.elo {
-  color: rgb(255, 255, 255);
-  font-weight: bold;
-  background-color: rgb(255, 0, 179) !important;
-
-  font-size: 0.5rem;
-  color: white;
-  opacity: 1;
-}
 .fc-day:hover {
-  background: rgba(221, 221, 221, 0.527);
+  background: rgba(220, 20, 60, 0.575);
   cursor: pointer;
 }

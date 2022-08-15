@@ -10,7 +10,7 @@ export const OrderSuccess = () => {
           <CheckCircleOutlineIcon className='orderSuccess__icon' />
           <span className='orderSuccess__desc'>
             Your order has been accepted. We have sent the order confirmation to
-            your e-mail address. You make payments for the ordered table in the
+            your e-mail address. You can pay for the ordered table in the
             restaurant.
           </span>
         </div>

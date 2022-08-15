@@ -1,11 +1,11 @@
-import {
-  InitialState as InitialStateType,
-  PersonalData as PersonalDataType,
-} from './../types/ReservationContextTypes'
-import { ACTIONS } from './../types/ReservationActionsTypes'
+import { ACTIONS } from '../types/ReservationActionsTypes'
 import { Dispatch } from 'react'
 import { ReservationAction } from '../types/ReservationActionsTypes'
 import axios from 'axios'
+import {
+  InitialState as InitialStateType,
+  PersonalData as PersonalDataType,
+} from '../types/ReservationContextTypes'
 
 export const newOrderCall = async (
   { date, time, table }: InitialStateType,

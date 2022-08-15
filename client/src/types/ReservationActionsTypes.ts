@@ -1,5 +1,5 @@
-import { HOURS } from '../types/ReservationContextTypes'
-import { InitialState } from '../types/ReservationContextTypes'
+import { HOURS } from './ReservationContextTypes'
+import { InitialState } from './ReservationContextTypes'
 
 export enum ACTIONS {
   setDate = 'setDate',

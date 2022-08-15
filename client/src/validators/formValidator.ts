@@ -1,6 +1,6 @@
 import { PersonalData as PersonalDataType } from '../types/ReservationContextTypes'
 import { hasNumber, onlyDigits, email } from './patterns'
-import { invalidName, invalidEmail, invalidPhone } from './errorsMessages'
+import { invalidName, invalidEmail, invalidPhone } from './errorMessages'
 
 export const validate = (personaData: PersonalDataType) => {
   const { name, phoneNumber, emailAddress } = personaData

@@ -38,9 +38,7 @@
 }
 .tablePicker__tableName {
   font-weight: 400;
+  height: 50px;
   letter-spacing: 1px;
   font-size: 1rem;
-}
-.test {
-  background-color: rgba(0, 128, 0, 0.514);
 }

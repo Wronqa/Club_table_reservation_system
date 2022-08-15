@@ -1,6 +1,5 @@
 .error {
   width: 50%;
-
   height: 150px;
   border-radius: 5px;
 }
@@ -12,27 +11,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-.error__title {
-  color: #ddd;
-  letter-spacing: 1.5px;
-  font-size: 1.5rem;
-  font-weight: 400;
-}
-.error__body {
   color: rgba(255, 255, 255, 0.719);
   margin-top: 5px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
 }
 .error__icon {
   font-size: 6rem !important;
   color: red;
 }
-.error__desc {
+.error__title {
   margin-top: 10px;
   margin-left: 20px;
   font-size: 4rem;

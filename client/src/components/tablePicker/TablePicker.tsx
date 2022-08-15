@@ -1,18 +1,15 @@
-import './tablePicker.css'
 import { useContext, useEffect, useState } from 'react'
-import ImageMapper, { AreaEvent, CustomArea } from 'react-img-mapper'
-import { config } from '../../utils/tablePickerConfig'
+import ImageMapper, { AreaEvent } from 'react-img-mapper'
+import { Area as AreaType } from '../../types/ComponentsTypes'
 import { ACTIONS } from '../../types/ReservationActionsTypes'
 import { ReservationContext } from '../../context/ReservationContext'
-import { Area as AreaType } from '../../types/TablePickerTypes'
 import { getAllTablesCall } from '../../apiCalls/tablesCalls'
 import { formatConfig } from '../../utils/mapperConfigFormatter'
 
-////PROBLEM Z TYPEM
-///Gdy już wybierzesz wolne stoliki dodaj wszystkie properties których brakuje i spróbuj zrobic ten typ
+import './tablePicker.css'
 
 export const TablePicker = () => {
-  const [mapperConfig, setMapperConfig] = useState<any | null>(null)
+  const [mapperConfig, setMapperConfig] = useState<any>(null)
   const [tableName, setTableName] = useState('')
   const [isLoading, setLoading] = useState<boolean>(true)
 
@@ -25,9 +22,15 @@ export const TablePicker = () => {
     }
     setTableName(name as string)
   }
+
   const handleClick = (area: AreaType, index: number, event: AreaEvent) => {
-    if (area.available)
+    if (area.available) {
       dispatch({ type: ACTIONS.setTable, payload: Number(area.id) })
+      localStorage.setItem(
+        'tableName',
+        `${area.name} | ${area.seats} PERSONS | ${area.price} PLN`
+      )
+    }
   }
 
   useEffect(() => {
@@ -37,8 +40,8 @@ export const TablePicker = () => {
       const res = await getAllTablesCall(dispatch, state.date as Date)
 
       if (res) {
-        const validConfig = formatConfig(res.data) ///Zmien na config
-        isMounted && setMapperConfig(validConfig)
+        const config = formatConfig(res.data)
+        isMounted && setMapperConfig(config)
       }
     }
     loadTables()
@@ -48,7 +51,12 @@ export const TablePicker = () => {
   }, [])
 
   useEffect(() => {
-    mapperConfig && setLoading(false)
+    let isMounted = true
+    isMounted && mapperConfig && setLoading(false)
+
+    return () => {
+      isMounted = false
+    }
   }, [mapperConfig])
 
   return (

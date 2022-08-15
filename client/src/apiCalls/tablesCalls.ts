@@ -1,4 +1,4 @@
-import { ReservationAction, ACTIONS } from './../types/ReservationActionsTypes'
+import { ReservationAction, ACTIONS } from '../types/ReservationActionsTypes'
 import { Dispatch } from 'react'
 import axios from 'axios'
 
@@ -14,20 +14,12 @@ export const getAllTablesCall = async (
         date,
       },
     })
+
     dispatch({ type: ACTIONS.requestStart })
-    console.log(res.data)
+
     return res.data
   } catch (err) {
     dispatch({ type: ACTIONS.requestError })
-  }
-}
-export const getTakenTablesCall = async (
-  dispatch: Dispatch<ReservationAction>
-) => {
-  dispatch({ type: ACTIONS.requestStart })
-
-  try {
-  } catch (err) {
-    dispatch({ type: ACTIONS.requestError })
+    return null
   }
 }

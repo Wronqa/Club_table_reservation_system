@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  FormEventHandler,
-  useContext,
-  useState,
-} from 'react'
+import { ChangeEvent, FormEvent, useContext, useState } from 'react'
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined'
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
@@ -13,17 +7,16 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import EmailIcon from '@mui/icons-material/Email'
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid'
 import PersonIcon from '@mui/icons-material/Person'
-import AddIcon from '@mui/icons-material/Add'
 import CheckIcon from '@mui/icons-material/Check'
-import './orderSummary.css'
 import { ReservationContext } from '../../context/ReservationContext'
 import { formatDate } from '../../utils/dateFormatter'
 import { ACTIONS } from '../../types/ReservationActionsTypes'
 import { PersonalData as PersonalDataType } from '../../types/ReservationContextTypes'
 import { validate } from '../../validators/formValidator'
 import { newOrderCall } from '../../apiCalls/orderCalls'
-import { useNavigate } from 'react-router-dom'
 import { OrderSuccess } from '../orderSuccess/OrderSuccess'
+
+import './orderSummary.css'
 
 export const OrderSummary = () => {
   const [personalData, setPersonalData] = useState<PersonalDataType>({
@@ -34,10 +27,7 @@ export const OrderSummary = () => {
   const [comment, setComment] = useState<string>('')
   const { state, dispatch } = useContext(ReservationContext)
   const [error, setError] = useState<string | null>(null)
-
   const [reservationState, setReservationState] = useState<boolean>(false)
-
-  const navigate = useNavigate()
 
   const changeDateHandler = () => {
     dispatch({ type: ACTIONS.setDate, payload: null })
@@ -63,8 +53,6 @@ export const OrderSummary = () => {
       )
       if (res?.data.success) setReservationState(true)
     }
-
-    ///dispatch({type:ACTIONS.setPersonalData, payload:})
   }
   return reservationState ? (
     <OrderSuccess />
@@ -102,22 +90,19 @@ export const OrderSummary = () => {
         </div>
         <div className='orderSummary__reservationInfo'>
           <div className='orderSummary__reservationInfoItem'>
-            <span className='text'>
+            <span className='orderSummary__text'>
               <BorderOuterOutlinedIcon className='orderSummary__icon' />
               Table reservation - Main Stage
             </span>
           </div>
           <div className='orderSummary__reservationInfoItem'>
-            <span className='text'>
-              {' '}
+            <span className='orderSummary__text'>
               <PersonOutlineOutlinedIcon className='orderSummary__icon' />
-              300PLN | Table 7-10 Persons
+              {localStorage.getItem('tableName')}
             </span>
           </div>
         </div>
-        <span className='orderSummary__addSeatsButton'>
-          <AddIcon className='orderSummary__icon' /> Add more seats
-        </span>
+
         <form
           className='orderSummary__personalDataForm'
           onSubmit={submitHandler}
@@ -187,12 +172,11 @@ export const OrderSummary = () => {
           />
           <button className='orderSummary__personalDataFormButton'>
             <CheckIcon className='orderSummary__icon' />
-            Go to payment
+            Confirm order
           </button>
         </form>
         <div className='orderSummary__termAccept'>
           <span className='termText'>
-            {' '}
             By clicking Confirm order, you agree to our Terms. Learn how we
             collect, use and share your data in our Privacy Policy and how we
             use cookies.
