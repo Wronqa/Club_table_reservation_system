@@ -23,6 +23,7 @@ import { PersonalData as PersonalDataType } from '../../types/ReservationContext
 import { validate } from '../../validators/formValidator'
 import { newOrderCall } from '../../apiCalls/orderCalls'
 import { useNavigate } from 'react-router-dom'
+import { OrderSuccess } from '../orderSuccess/OrderSuccess'
 
 export const OrderSummary = () => {
   const [personalData, setPersonalData] = useState<PersonalDataType>({
@@ -33,6 +34,8 @@ export const OrderSummary = () => {
   const [comment, setComment] = useState<string>('')
   const { state, dispatch } = useContext(ReservationContext)
   const [error, setError] = useState<string | null>(null)
+
+  const [reservationState, setReservationState] = useState<boolean>(false)
 
   const navigate = useNavigate()
 
@@ -58,12 +61,14 @@ export const OrderSummary = () => {
         dispatch,
         comment ? comment : null
       )
-      if (res?.data.success) navigate('/order-success')
+      if (res?.data.success) setReservationState(true)
     }
 
     ///dispatch({type:ACTIONS.setPersonalData, payload:})
   }
-  return (
+  return reservationState ? (
+    <OrderSuccess />
+  ) : (
     <div className='orderSummary'>
       <div className='orderSummary__container'>
         <div className='orderSummary__top'>
