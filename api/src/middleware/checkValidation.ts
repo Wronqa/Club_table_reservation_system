@@ -1,7 +1,6 @@
-const { check, body, param } = require('express-validator')
-const { validator } = require('express-validator')
+import { Request } from 'express'
+const { body } = require('express-validator')
 const moment = require('moment')
-import { Request, Response, NextFunction } from 'express'
 
 const checkValidation = (req: Request) => {
   return [

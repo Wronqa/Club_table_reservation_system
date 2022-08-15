@@ -2,7 +2,7 @@ require('dotenv').config({ path: __dirname + '/config/.env' })
 
 const express = require('express')
 const tablesRoute = require('./routes/tablesRoute')
-const reservationRoute = require('./routes/reservationRoute')
+const orderRoute = require('./routes/reservationRoute')
 const helmet = require('helmet')
 const morgan = require('morgan')
 
@@ -13,6 +13,6 @@ app.use(helmet())
 app.use(morgan('common'))
 
 app.use('/api/tables', tablesRoute)
-app.use('/api/reservation', reservationRoute)
+app.use('/api/order', orderRoute)
 
 export = app

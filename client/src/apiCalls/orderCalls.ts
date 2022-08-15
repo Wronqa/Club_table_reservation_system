@@ -16,7 +16,7 @@ export const newOrderCall = async (
   dispatch({ type: ACTIONS.requestStart })
 
   try {
-    const res = await axios.post('/reservation', {
+    const res = await axios.post('/order', {
       personalData,
       comment,
       reservationInfo: { date, time, table_id: table },
@@ -36,7 +36,7 @@ export const gerOrderDetails = async (
 ) => {
   dispatch({ type: ACTIONS.requestStart })
   try {
-    const res = await axios.get(`/reservation/${id}`)
+    const res = await axios.get(`/order/${id}`)
 
     dispatch({ type: ACTIONS.requestSuccess })
     return res.data

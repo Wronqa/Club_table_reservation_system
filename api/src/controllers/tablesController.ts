@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
+
 const runQuery = require('../config/database')
 const { tableQueries } = require('../queries/tableQueries')
-const { validator } = require('express-validator')
 const moment = require('moment')
 const tableFilter = require('../utils/tableFilter')
 

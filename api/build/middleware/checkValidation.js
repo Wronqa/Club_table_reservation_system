@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const { check, body, param } = require('express-validator');
-const { validator } = require('express-validator');
+const { body } = require('express-validator');
 const moment = require('moment');
 const checkValidation = (req) => {
     return [

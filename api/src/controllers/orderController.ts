@@ -1,7 +1,8 @@
-import { tableQueries } from './../queries/tableQueries'
-import { Request, Response, NextFunction } from 'express'
-import { body, validationResult } from 'express-validator'
+import { tableQueries } from '../queries/tableQueries'
+import { Request, Response } from 'express'
+import { validationResult } from 'express-validator'
 import { getReservationSummaryMessage } from '../templates/reservationSummaryMessage'
+
 const clientQueries = require('../queries/clientQueries')
 const orderQueries = require('../queries/orderQueries')
 const runQuery = require('../config/database')
@@ -9,7 +10,7 @@ const checkAvailability = require('../utils/availabilityChecker')
 const sendEmail = require('../utils/mailSender')
 const { v4: uuidv4 } = require('uuid')
 const formatName = require('../utils/tableNameFormatter')
-var escape = require('escape-html')
+const escape = require('escape-html')
 
 exports.newOrder = async (req: Request, res: Response) => {
   const errors = validationResult(req)
@@ -32,7 +33,7 @@ exports.newOrder = async (req: Request, res: Response) => {
 
     const public_id = uuidv4()
 
-    const result = await runQuery(
+    await runQuery(
       orderQueries.insert({
         ...reservationInfo,
         client_id: id.id,
@@ -59,7 +60,7 @@ exports.newOrder = async (req: Request, res: Response) => {
       link: `${process.env.CLIENT_URL}order/${public_id}`,
     })
 
-    const mail = await sendEmail({
+    await sendEmail({
       from: process.env.MAIL_USERNAME,
       to: personalData.emailAddress,
       subject: 'Your order confirmation',
