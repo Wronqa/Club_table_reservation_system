@@ -15,4 +15,4 @@ app.use(morgan('common'))
 app.use('/api/tables', tablesRoute)
 app.use('/api/order', orderRoute)
 
-export = app
+module.exports = app

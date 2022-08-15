@@ -20,9 +20,9 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const tableQueries_1 = require("../queries/tableQueries");
 const express_validator_1 = require("express-validator");
-const reservationSummaryMessage_1 = require("../templates/reservationSummaryMessage");
+const getReservationSummaryMessage = require('../templates/reservationSummaryMessage');
+const tableQueries = require('../queries/tableQueries');
 const clientQueries = require('../queries/clientQueries');
 const orderQueries = require('../queries/orderQueries');
 const runQuery = require('../config/database');
@@ -47,13 +47,13 @@ exports.newOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const id = client.recordsets[0][0];
         const public_id = uuidv4();
         yield runQuery(orderQueries.insert(Object.assign(Object.assign({}, reservationInfo), { client_id: id.id, public_id })));
-        const table = yield runQuery(tableQueries_1.tableQueries.selectTableName(reservationInfo.table_id));
+        const table = yield runQuery(tableQueries.selectTableName(reservationInfo.table_id));
         const tableName = formatName({
             name: table.recordset[0].name,
             seats: table.recordset[0].seats,
             price: table.recordset[0].price,
         });
-        const message = (0, reservationSummaryMessage_1.getReservationSummaryMessage)({
+        const emailMessage = getReservationSummaryMessage({
             name: personalData.name,
             phone: personalData.phoneNumber,
             tableName: tableName,
@@ -65,7 +65,7 @@ exports.newOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             from: process.env.MAIL_USERNAME,
             to: personalData.emailAddress,
             subject: 'Your order confirmation',
-            html: message,
+            html: emailMessage,
         });
         res.status(200).json({
             success: true,
@@ -74,7 +74,6 @@ exports.newOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
     catch (err) {
-        console.log(err);
         res.status(500).json({
             success: false,
             error: err,

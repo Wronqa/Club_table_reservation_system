@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const checkValidation = require('../middleware/checkValidation');
 const router = require('express').Router();
 const { newOrder, getOrderDetails, } = require('../controllers/reservationController');

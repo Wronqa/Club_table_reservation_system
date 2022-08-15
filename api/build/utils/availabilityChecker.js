@@ -8,11 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const runQuery = require('../config/database');
-const tableQueries_1 = require("../queries/tableQueries");
+const tableQueries = require('../queries/tableQueries');
 const checkAvailability = (id, date) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield runQuery(tableQueries_1.tableQueries.checkAvailability(id, date));
+    const result = yield runQuery(tableQueries.checkAvailability(id, date));
     if (result.rowsAffected[0] !== 0) {
         throw 'This table is not available';
     }

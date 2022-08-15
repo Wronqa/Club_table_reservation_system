@@ -19,8 +19,8 @@ exports.getAllTables = (req, res) => __awaiter(void 0, void 0, void 0, function*
         if (!moment(date, 'YYYY-MM-DD', true).isValid())
             throw 'Invalid date format';
         const tables = yield runQuery(tableQueries.selectAll);
-        const taken = yield runQuery(tableQueries.selectTaken(date));
-        const filteredTables = tableFilter(tables.recordsets, taken.recordsets);
+        const takenTables = yield runQuery(tableQueries.selectTaken(date));
+        const filteredTables = tableFilter(tables.recordsets, takenTables.recordsets);
         res.status(200).json({
             success: true,
             error: null,

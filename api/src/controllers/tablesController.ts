@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
 
 const runQuery = require('../config/database')
 const { tableQueries } = require('../queries/tableQueries')
@@ -13,8 +13,11 @@ exports.getAllTables = async (req: Request, res: Response) => {
 
     const tables = await runQuery(tableQueries.selectAll)
 
-    const taken = await runQuery(tableQueries.selectTaken(date))
-    const filteredTables = tableFilter(tables.recordsets, taken.recordsets)
+    const takenTables = await runQuery(tableQueries.selectTaken(date))
+    const filteredTables = tableFilter(
+      tables.recordsets,
+      takenTables.recordsets
+    )
 
     res.status(200).json({
       success: true,

@@ -1,5 +1,5 @@
 const runQuery = require('../config/database')
-import { tableQueries } from '../queries/tableQueries'
+const tableQueries = require('../queries/tableQueries')
 
 const checkAvailability = async (id: number, date: Date) => {
   const result = await runQuery(tableQueries.checkAvailability(id, date))

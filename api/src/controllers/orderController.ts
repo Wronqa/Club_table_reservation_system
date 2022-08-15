@@ -1,8 +1,8 @@
-import { tableQueries } from '../queries/tableQueries'
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
-import { getReservationSummaryMessage } from '../templates/reservationSummaryMessage'
 
+const getReservationSummaryMessage = require('../templates/reservationSummaryMessage')
+const tableQueries = require('../queries/tableQueries')
 const clientQueries = require('../queries/clientQueries')
 const orderQueries = require('../queries/orderQueries')
 const runQuery = require('../config/database')
@@ -51,7 +51,7 @@ exports.newOrder = async (req: Request, res: Response) => {
       price: table.recordset[0].price,
     })
 
-    const message = getReservationSummaryMessage({
+    const emailMessage = getReservationSummaryMessage({
       name: personalData.name,
       phone: personalData.phoneNumber,
       tableName: tableName,
@@ -64,7 +64,7 @@ exports.newOrder = async (req: Request, res: Response) => {
       from: process.env.MAIL_USERNAME,
       to: personalData.emailAddress,
       subject: 'Your order confirmation',
-      html: message,
+      html: emailMessage,
     })
 
     res.status(200).json({
@@ -73,7 +73,6 @@ exports.newOrder = async (req: Request, res: Response) => {
       data: 'Reservation successfully',
     })
   } catch (err) {
-    console.log(err)
     res.status(500).json({
       success: false,
       error: err,
