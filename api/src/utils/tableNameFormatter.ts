@@ -1,7 +1,7 @@
 const formatName = (obj: any) => {
   ///zmien
-  const record = obj.recordset[0]
-  return `${record.name}  |  ${record.seats} Person  |  ${record.price} PLN`
+
+  return `${obj.name}  |  ${obj.seats} Person  |  ${obj.price} PLN`
 }
 
 module.exports = formatName

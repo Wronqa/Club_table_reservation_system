@@ -9,6 +9,7 @@ const checkAvailability = require('../utils/availabilityChecker')
 const sendEmail = require('../utils/mailSender')
 const { v4: uuidv4 } = require('uuid')
 const formatName = require('../utils/tableNameFormatter')
+var escape = require('escape-html')
 
 exports.newOrder = async (req: Request, res: Response) => {
   const errors = validationResult(req)
@@ -43,7 +44,11 @@ exports.newOrder = async (req: Request, res: Response) => {
       tableQueries.selectTableName(reservationInfo.table_id)
     )
 
-    const tableName = formatName(table)
+    const tableName = formatName({
+      name: table.recordset[0].name,
+      seats: table.recordset[0].seats,
+      price: table.recordset[0].price,
+    })
 
     const message = getReservationSummaryMessage({
       name: personalData.name,
@@ -51,7 +56,7 @@ exports.newOrder = async (req: Request, res: Response) => {
       tableName: tableName,
       date: reservationInfo.date,
       time: reservationInfo.time,
-      link: `${process.env.CLIENT_URL}/${public_id}`,
+      link: `${process.env.CLIENT_URL}order/${public_id}`,
     })
 
     const mail = await sendEmail({
@@ -68,6 +73,37 @@ exports.newOrder = async (req: Request, res: Response) => {
     })
   } catch (err) {
     console.log(err)
+    res.status(500).json({
+      success: false,
+      error: err,
+      data: null,
+    })
+  }
+}
+
+exports.getOrderDetails = async (req: Request, res: Response) => {
+  const id = escape(req.params.id)
+
+  try {
+    const result = await runQuery(orderQueries.getDetails(id))
+
+    const { seats, price, ...others } = result.recordset[0]
+
+    const orderDetails = {
+      ...others,
+      tableName: formatName({
+        name: others.tableName,
+        seats: seats,
+        price: price,
+      }),
+    }
+
+    res.status(200).json({
+      success: true,
+      error: null,
+      data: orderDetails,
+    })
+  } catch (err) {
     res.status(500).json({
       success: false,
       error: err,

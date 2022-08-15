@@ -30,3 +30,18 @@ export const newOrderCall = async (
     return null
   }
 }
+export const gerOrderDetails = async (
+  dispatch: Dispatch<ReservationAction>,
+  id: string | undefined
+) => {
+  dispatch({ type: ACTIONS.requestStart })
+  try {
+    const res = await axios.get(`/reservation/${id}`)
+
+    dispatch({ type: ACTIONS.requestSuccess })
+    return res.data
+  } catch (err) {
+    dispatch({ type: ACTIONS.requestError })
+    return null
+  }
+}
